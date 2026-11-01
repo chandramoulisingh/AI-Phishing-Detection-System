@@ -1,155 +1,281 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhishGuard | AI Phishing Detection</title>
+    <title>PhishGuard | AI Phishing Detection & Threat Intelligence</title>
+
+    <!-- Official Lenis Recommended CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1/dist/lenis.css">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-    <!-- Navigation Bar -->
-    <header class="navbar">
-        <div class="logo">Phish<span>Guard.</span></div>
+    <!-- 3D Shield Background Animation Canvas -->
+    <canvas id="shieldCanvas" class="shield-canvas" aria-hidden="true"></canvas>
+    <div class="ambient-glow" aria-hidden="true"></div>
+    <div class="vignette-overlay" aria-hidden="true"></div>
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#scanner">URL Scanner</a>
-            <a href="#features">Features</a>
-            <a href="#about">About</a>
+    <!-- Minimalist Cinematic HUD Header -->
+    <header class="hud-header">
+        <div class="hud-brand" onclick="jumpToScene(0)" role="button" tabindex="0">
+            <span class="brand-pulse"></span>
+            <span class="brand-name">Phish<span class="brand-accent">Guard.</span></span>
+            <span class="hud-status">AI ENGINE // ACTIVE</span>
+        </div>
+
+        <nav class="hud-nav" aria-label="Scene navigation">
+            <button class="hud-pill active" onclick="jumpToScene(0)" data-scene="0">
+                <span class="pill-num">01</span>
+                <span class="pill-title">INTRO</span>
+            </button>
+            <button class="hud-pill" onclick="jumpToScene(1)" data-scene="1">
+                <span class="pill-num">02</span>
+                <span class="pill-title">THREAT</span>
+            </button>
+            <button class="hud-pill" onclick="jumpToScene(2)" data-scene="2">
+                <span class="pill-num">03</span>
+                <span class="pill-title">NEURAL</span>
+            </button>
+            <button class="hud-pill" onclick="jumpToScene(3)" data-scene="3">
+                <span class="pill-num">04</span>
+                <span class="pill-title">SCANNER</span>
+            </button>
+            <button class="hud-pill" onclick="jumpToScene(4)" data-scene="4">
+                <span class="pill-num">05</span>
+                <span class="pill-title">PROMISE</span>
+            </button>
         </nav>
 
-        <a href="#scanner" class="nav-button">Scan URL</a>
+        <div class="hud-actions">
+            <button class="hud-scan-btn" onclick="jumpToScene(3)">
+                <span class="btn-dot"></span>
+                <span>SCAN URL</span>
+            </button>
+        </div>
     </header>
 
+    <!-- Scroll Runway Track (Gives Lenis the physical runway to drive progress 0.0 -> 1.0) -->
+    <div class="scroll-track" id="scrollTrack"></div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
+    <!-- Fixed Viewport Stage (Narrative scenes fade & float around the central shield) -->
+    <main class="viewport-stage" id="viewportStage">
 
-        <div class="hero-content">
-            <p class="tagline">AI-POWERED CYBERSECURITY</p>
+        <!-- ==============================================
+             SCENE 1: INTRODUCTION
+             ============================================== -->
+        <section class="scene scene-intro" id="scene-0" aria-label="Introduction">
+            <div class="scene-content scene-content-center">
+                <div class="scene-overline">
+                    <span class="hud-line"></span>
+                    <span>AI-POWERED CYBER DEFENSE</span>
+                    <span class="hud-line"></span>
+                </div>
 
-            <h1>Stay Safe.<br>
-                Browse <span>Smart.</span>
-            </h1>
+                <h1 class="scene-headline">
+                    Your Digital World.<br>
+                    <span class="text-glow">Protected.</span>
+                </h1>
 
-            <p class="hero-description">
-                Protect yourself from online threats with intelligent
-                phishing detection. Scan suspicious URLs and browse
-                the internet with confidence.
-            </p>
+                <p class="scene-subtext">
+                    An autonomous threat detection engine continuously analyzing web destinations.
+                    Engineered to neutralize deceptive links before they reach your browser.
+                </p>
 
-            <a href="#scanner" class="primary-button">
-                Scan a Website →
-            </a>
-        </div>
-
-        <div class="hero-visual">
-            <div class="shield-icon">🛡️</div>
-            <h3>Your Digital Safety Matters</h3>
-            <p>Smart detection. Safer browsing.</p>
-        </div>
-
-    </section>
-
-
-    <!-- URL Scanner Section -->
-    <section class="scanner-section" id="scanner">
-
-        <div class="section-heading">
-            <p class="tagline">WEBSITE SECURITY CHECK</p>
-            <h2>Check Before You <span>Click.</span></h2>
-            <p>Enter a website URL below to check whether it is safe or suspicious.</p>
-        </div>
-
-        <div class="scanner-card">
-
-            <label for="urlInput">Enter Website URL</label>
-
-            <div class="input-group">
-                <input
-                    type="text"
-                    id="urlInput"
-                    placeholder="https://example.com"
-                >
-
-                <button id="scanButton" onclick="scanURL()">
-                    Scan URL
-                </button>
+                <div class="scroll-indicator">
+                    <span class="mouse-icon">
+                        <span class="wheel-dot"></span>
+                    </span>
+                    <span class="scroll-prompt">SCROLL TO EXPLORE</span>
+                </div>
             </div>
-
-            <p class="input-note">
-                🔒 Your online safety starts with one scan.
-            </p>
-
-            <!-- Results will appear here -->
-            <div id="resultBox" class="result-box"></div>
-
-        </div>
-
-    </section>
+        </section>
 
 
-    <!-- Features Section -->
-    <section class="features-section" id="features">
+        <!-- ==============================================
+             SCENE 2: THE PROBLEM (Left Flank)
+             ============================================== -->
+        <section class="scene scene-problem" id="scene-1" aria-label="The Threat Surface">
+            <div class="scene-content scene-content-left">
+                <div class="scene-overline text-alert">
+                    <span class="hud-dot alert-dot"></span>
+                    <span>THE DECEPTION SURFACE</span>
+                </div>
 
-        <div class="section-heading">
-            <p class="tagline">WHY PHISHGUARD?</p>
-            <h2>Smarter Protection for a <span>Safer Internet.</span></h2>
-        </div>
+                <h2 class="scene-headline">
+                    Not Every Link Is<br>
+                    <span class="text-alert">What It Seems.</span>
+                </h2>
 
-        <div class="features-grid">
+                <p class="scene-subtext">
+                    Over 91% of modern cyber breaches originate from deceptive URLs.
+                    Adversaries deploy synthetic lookalike domains, weaponized subpaths,
+                    and homograph exploits that bypass conventional firewalls undetected.
+                </p>
 
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3>AI-Powered Detection</h3>
-                <p>Machine learning helps identify potentially malicious websites.</p>
+                <div class="telemetry-deck">
+                    <div class="telemetry-card">
+                        <div class="tel-number text-alert">91%</div>
+                        <div class="tel-caption">Attacks Initiate via Deceptive Links</div>
+                    </div>
+                    <div class="telemetry-card">
+                        <div class="tel-number">&lt; 0.2s</div>
+                        <div class="tel-caption">Time to Compromise on Landing</div>
+                    </div>
+                    <div class="telemetry-card">
+                        <div class="tel-number text-icy">3.4M+</div>
+                        <div class="tel-caption">Zero-Day Clones Created Monthly</div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="feature-card">
-                <div class="feature-icon">🔍</div>
-                <h3>URL Analysis</h3>
-                <p>Analyze website URL characteristics to detect suspicious patterns.</p>
+
+        <!-- ==============================================
+             SCENE 3: THE TECHNOLOGY (Right Flank)
+             ============================================== -->
+        <section class="scene scene-tech" id="scene-2" aria-label="Machine Learning Architecture">
+            <div class="scene-content scene-content-right">
+                <div class="scene-overline text-icy">
+                    <span class="hud-dot icy-dot"></span>
+                    <span>NEURAL DEFENSE ARCHITECTURE</span>
+                </div>
+
+                <h2 class="scene-headline">
+                    Intelligence Behind<br>
+                    <span class="text-icy">Every Click.</span>
+                </h2>
+
+                <p class="scene-subtext">
+                    PhishGuard dissects URL payloads through multi-layer algorithmic heuristics,
+                    evaluating structural anomalies and domain entropy to identify synthetic fraud in real time.
+                </p>
+
+                <div class="tech-nodes">
+                    <div class="tech-row">
+                        <span class="node-id">01 //</span>
+                        <div class="node-body">
+                            <h4>Lexical Entropy Evaluation</h4>
+                            <p>Detects algorithmic randomness and suspicious token distributions.</p>
+                        </div>
+                    </div>
+                    <div class="tech-row">
+                        <span class="node-id">02 //</span>
+                        <div class="node-body">
+                            <h4>Homoglyph Character Defense</h4>
+                            <p>Unmasks spoofed internationalized domain names (IDN) posing as trusted brands.</p>
+                        </div>
+                    </div>
+                    <div class="tech-row">
+                        <span class="node-id">03 //</span>
+                        <div class="node-body">
+                            <h4>Heuristic Risk Scoring</h4>
+                            <p>Instant predictive probability classification prior to network packet release.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Quick Results</h3>
-                <p>Get a clear security assessment after scanning a website.</p>
+
+        <!-- ==============================================
+             SCENE 4: THE SCANNER (Interactive Cyber-Terminal)
+             ============================================== -->
+        <section class="scene scene-scanner" id="scene-3" aria-label="Interactive URL Scanner">
+            <div class="scene-content scene-content-scanner">
+                <div class="scene-overline">
+                    <span class="hud-line"></span>
+                    <span>INTERACTIVE THREAT SCANNER</span>
+                    <span class="hud-line"></span>
+                </div>
+
+                <h2 class="scene-headline scene-headline-compact">
+                    Check Before You <span class="text-alert">Click.</span>
+                </h2>
+
+                <p class="scene-subtext scene-subtext-compact">
+                    Input any suspicious website address or unfamiliar link for real-time threat evaluation.
+                </p>
+
+                <!-- Cyber-Terminal HUD Scanner -->
+                <div class="cyber-terminal" id="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-status">
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-meta">HEURISTIC ENGINE // STANDBY</span>
+                        </div>
+                        <div class="terminal-telemetry">PORT 443 // SECURE</div>
+                    </div>
+
+                    <div class="terminal-body">
+                        <div class="input-line">
+                            <span class="terminal-prompt">&gt;</span>
+                            <input
+                                type="text"
+                                id="urlInput"
+                                placeholder="Enter or paste URL (e.g. https://secure-bank-login.xyz)"
+                                autocomplete="off"
+                                spellcheck="false"
+                            >
+                            <button id="scanButton" onclick="scanURL()">
+                                <span class="scan-btn-glow"></span>
+                                <span class="scan-btn-label">SCAN URL</span>
+                            </button>
+                        </div>
+
+                        <div class="terminal-note">
+                            <span class="note-icon">🔒</span>
+                            <span>Safe sandboxed analysis. Zero network payload execution on your machine.</span>
+                        </div>
+
+                        <!-- Live Diagnostic Output Box -->
+                        <div id="resultBox" class="result-box"></div>
+                    </div>
+                </div>
             </div>
-
-        </div>
-
-    </section>
+        </section>
 
 
-    <!-- About Section -->
-    <section class="about-section" id="about">
+        <!-- ==============================================
+             SCENE 5: THE PROMISE & CLOSING
+             ============================================== -->
+        <section class="scene scene-promise" id="scene-4" aria-label="Closing Promise and Credits">
+            <div class="scene-content scene-content-center">
+                <div class="scene-overline text-icy">
+                    <span class="hud-line"></span>
+                    <span>THE ASSURANCE</span>
+                    <span class="hud-line"></span>
+                </div>
 
-        <div>
-            <p class="tagline">ABOUT THE PROJECT</p>
-            <h2>Making the Internet <span>Safer.</span></h2>
-        </div>
+                <h2 class="scene-headline">
+                    Browse With <span class="text-glow">Confidence.</span>
+                </h2>
 
-        <p>
-            PhishGuard is an AI-based phishing website and URL detection
-            system developed to help users identify potentially harmful
-            websites using machine learning.
-        </p>
+                <p class="scene-subtext scene-subtext-wide">
+                    The modern internet should inspire exploration, not vulnerability.
+                    PhishGuard pairs artificial intelligence with proactive vigilance to build
+                    a safer digital frontier for every user.
+                </p>
 
-    </section>
+                <!-- Minimalist Cinematic Footer HUD -->
+                <footer class="cinematic-footer">
+                    <div class="footer-brand">Phish<span>Guard.</span></div>
+                    <div class="footer-meta">AI-Based Phishing Website &amp; URL Detection System</div>
+                    <div class="footer-copyright">© 2026 PhishGuard Project. All rights reserved.</div>
 
+                    <button class="return-top-btn" onclick="jumpToScene(0)">
+                        <span>↑ RETURN TO APEX</span>
+                    </button>
+                </footer>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="logo">Phish<span>Guard.</span></div>
-        <p>AI-Based Phishing Website and URL Detection System</p>
-        <p>© 2026 PhishGuard. All rights reserved.</p>
-    </footer>
+    </main>
 
+    <!-- Official Lenis Smooth Scroll Library (CDN) -->
+    <script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 
